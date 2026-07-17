@@ -1,0 +1,4 @@
+com/example/shareapp/ShareAppApplication.class
+com/example/shareapp/model/ClickLog.class
+com/example/shareapp/controller/MessageController.class
+com/example/shareapp/repository/ClickLogRepository.class
