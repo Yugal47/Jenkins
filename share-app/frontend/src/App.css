@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+  margin-top: 80px;
+  font-family: Arial, sans-serif;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #16a34a;
+}
+
+.error {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #dc2626;
+}
