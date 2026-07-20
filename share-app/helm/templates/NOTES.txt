@@ -1,0 +1,17 @@
+Share App deployed as release "{{ .Release.Name }}" in namespace "{{ .Release.Namespace }}".
+
+Check status:
+  kubectl get pods -n {{ .Release.Namespace }}
+
+{{- if .Values.ingress.enabled }}
+
+Ingress is enabled. Add this to /etc/hosts (or your DNS) if using a local cluster:
+  <ingress-ip>  {{ .Values.ingress.host }}
+
+Then visit: http://{{ .Values.ingress.host }}
+{{- else }}
+
+Ingress is disabled. Access the frontend with port-forward:
+  kubectl port-forward svc/{{ .Release.Name }}-frontend 3000:{{ .Values.frontend.service.port }}
+  kubectl port-forward svc/{{ .Release.Name }}-backend 8080:{{ .Values.backend.service.port }}
+{{- end }}
