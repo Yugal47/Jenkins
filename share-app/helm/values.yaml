@@ -1,0 +1,61 @@
+# Default values for share-app.
+
+backend:
+  image:
+    repository: yugal47/shareappbackend   # <-- update to your backend image
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  env: {}
+    # Extra env vars can go here as key: value pairs.
+    # The DB connection URL is already wired up in templates/backend-deployment.yaml.
+
+frontend:
+  image:
+    repository: yugal47/shareappfrontend  # <-- update to your frontend image
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 3000
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 550m
+      memory: 656Mi
+  env:
+    # URL the React app calls in the browser - update to your real ingress host in production
+    API_BASE_URL: "http://127.0.0.1:8080/api"
+
+postgres:
+  image:
+    repository: postgres
+    tag: "16"
+  service:
+    port: 5432
+  storage:
+    size: 1Gi
+    storageClassName: ""   # leave blank to use the cluster default
+  auth:
+    database: shareapp_db
+    username: postgres
+    password: postgres   # for real deployments, put this in a Secret instead (see NOTES.txt)
+
+ingress:
+  enabled: false
+  className: nginx
+  host: share-app.local
+  annotations: {}

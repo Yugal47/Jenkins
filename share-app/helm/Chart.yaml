@@ -1,0 +1,6 @@
+apiVersion: v2
+name: share-app
+description: Helm chart for the Share App (React frontend, Spring Boot backend, PostgreSQL)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
