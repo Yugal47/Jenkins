@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-ssh', url: 'git@gitlab.com:devops-projectss/shareapp.git'
+                git branch: 'main', credentialsId: 'github-ssh', url: 'git@gitlab.com:devops-projectss/shareapp.git'  //this should be changed
             }
         }
         stage('compiling') {
@@ -71,6 +71,16 @@ pipeline {
                 """
             }
         }
+	stage('starting app') {
+            steps {
+                dir("share-app/helm"){
+		withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {     //this should be changed
+			sh """
+                            helm upgrade --install share-app .
+			"""
+		}
+            }
+	}
     }
 }
 
